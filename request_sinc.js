@@ -8,8 +8,8 @@ fetch('https://6a73b2b015e0453fe1b424ed.mockapi.io/personas', {
   // handle error
 }).then(Item => Item.forEach(p => {
 
-  console.log(Item);
-  document.querySelector('.registros').innerHTML='<p>Nombre: ${p.nombre}</p> <p>Direccion: ${p.direccion}</p> <img url= ${p.imagen} alt="imagen" width="100"><hr></hr>';
+  console.log(p);
+  document.querySelector('.registros').innerHTML+=`<p>Nombre: ${p.nombre}</p> <p>Direccion: ${p.direccion}</p> <img src="${p.imagen}" alt="imagen" width="100"><hr>`;
 })
 ).catch(error => {
   // handle error
