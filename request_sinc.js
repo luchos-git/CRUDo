@@ -5,7 +5,6 @@ fetch('https://6a73b2b015e0453fe1b424ed.mockapi.io/personas', {
   if (Response.ok) {
       return Response.json();
   }
-  // handle error
 }).then(Item => Item.forEach(p => {
 
   console.log(p);
