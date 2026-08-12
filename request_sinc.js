@@ -1,21 +1,21 @@
 //1. cargar todos los registros (se conecta con el 5 para mostrar los registros que se van quedando y eliminados)
-fetch('https://6a73b2b015e0453fe1b424ed.mockapi.io/personas', {
-  method: 'GET',
-  headers: {'content-type':'application/json'},
-}).then(Response => {
-  if (Response.ok) {
-      return Response.json();
-  }
-}).then(Items => Items.forEach(p => {
+// fetch('https://6a73b2b015e0453fe1b424ed.mockapi.io/personas', {
+//   method: 'GET',
+//   headers: {'content-type':'application/json'},
+// }).then(Response => {
+//   if (Response.ok) {
+//       return Response.json();
+//   }
+// }).then(Items => Items.forEach(p => {
 
-  // console.log(p);
-  document.querySelector('.registros').innerHTML+=`<p>Nombre: ${p.nombre}</p> <p>Direccion: ${p.direccion}</p> <img src="${p.imagen}" alt="imagen" width="100"><hr>`;
-})
-).catch(error => {
-  // handle error
-  console.error('Error fetching personas:', error);
-}
-)
+//   // console.log(p);
+//   document.querySelector('.registros').innerHTML+=`<p>Nombre: ${p.nombre}</p> <p>Direccion: ${p.direccion}</p> <img src="${p.imagen}" alt="imagen" width="100"><hr>`;
+// })
+// ).catch(error => {
+//   // handle error
+//   console.error('Error fetching personas:', error);
+// }
+// )
 
 //2. obtener un registro a base de un id
 // const id=2
@@ -82,18 +82,40 @@ fetch('https://6a73b2b015e0453fe1b424ed.mockapi.io/personas', {
 // })
 
 //5. eliminar un registro a bace de un id (se conecta con el 1 para mostrar los registros que se van quedando y eliminados)
-const id=1
-fetch(`https://6a73b2b015e0453fe1b424ed.mockapi.io/personas/${id}`, {
-  method: 'DELETE',
-  headers: {'content-type':'application/json'},
+// const id=1
+// fetch(`https://6a73b2b015e0453fe1b424ed.mockapi.io/personas/${id}`, {
+//   method: 'DELETE',
+//   headers: {'content-type':'application/json'},
 
-}).then(res => {
-  if (res.ok) {
-      return res.json();
+// }).then(res => {
+//   if (res.ok) {
+//       return res.json();
+//   }
+//   // handle error
+// }).then(persona => {
+//   console.log(`${persona.id} registro eliminado:`);
+// }).catch(error => {
+//   // handle error
+// })
+
+//6. filtros (es copiar lo mismo que el 1 pero con un parametro de busqueda)
+const url = new URL('https://6a73b2b015e0453fe1b424ed.mockapi.io/personas');
+url.searchParams.append('nombre', 'May');
+
+fetch(url, {
+  method: 'GET',
+  headers: {'content-type':'application/json'},
+}).then(Response => {
+  if (Response.ok) {
+      return Response.json();
   }
-  // handle error
-}).then(persona => {
-  console.log(`${persona.id} registro eliminado:`);
-}).catch(error => {
-  // handle error
+}).then(Items => Items.forEach(p => {
+
+  // console.log(p);
+  document.querySelector('.registros').innerHTML+=`<p>Nombre: ${p.nombre}</p> <p>Direccion: ${p.direccion}</p> <img src="${p.imagen}" alt="imagen" width="100"><hr>`;
 })
+).catch(error => {
+  // handle error
+  console.error('Error fetching personas:', error);
+}
+)
